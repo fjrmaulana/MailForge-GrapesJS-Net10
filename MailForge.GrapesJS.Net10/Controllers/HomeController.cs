@@ -21,7 +21,7 @@ namespace MailForge.GrapesJS.Net10.Controllers
                 return Json(new { success = false, message = "Konten email kosong atau tidak valid!" });
             }
 
-            // DI SINI DATA SUDAH MASUK SERVER C#
+            // DI SINI DATA SUDAH MASUK SERVER C# dengan baik
             // Di masa depan, variabel data.HtmlContent ini bisa dikirim via SMTP MailKit atau disimpan ke DB SQL Server
             string namaTemplate = data.TemplateName ?? "Tanpa Nama";
             string isiHtmlMurni = data.HtmlContent;
