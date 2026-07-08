@@ -61,11 +61,40 @@ function openEmailPreview() {
 // Fungsi untuk mengekstrak kode HTML dan CSS murni dari editor ke console log
 function exportEmailHtml() {
     if (window.emailEditor) {
-        const htmlContent = window.emailEditor.getHtml();
-        const cssContent = window.emailEditor.getCss();
-        const fullTemplate = `<style>${cssContent}</style>\n${htmlContent}`;
+        // 1. Ambil HTML dan CSS dari kanvas GrapesJS
+        var htmlContent = window.emailEditor.getHtml();
+        var cssContent = window.emailEditor.getCss();
 
-        console.log(fullTemplate);
-        alert("Berhasil! Kode HTML email murni sudah dicetak di Console Browser (Tekan F12 untuk melihat).");
+        // Satukan menjadi struktur dokumen HTML email utuh menggunakan inline style standar
+        var templateUtuh = '<html><head><style>' + cssContent + '</style></head><body style="margin:0; padding:20px;">' + htmlContent + '</body></html>';
+
+        // 2. Siapkan data object yang akan dikirim (sesuai properti EmailData.cs di C#)
+        var payload = {
+            TemplateName: "Newsletter Campaign Phase 2",
+            HtmlContent: templateUtuh
+        };
+
+        // 3. Tembak data ke Controller backend menggunakan Fetch API JSON
+        fetch('/Home/SaveTemplate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload) // Ubah object menjadi string JSON
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Tampilkan notifikasi pop-up jika server sukses merespon
+                    alert(data.message);
+                    console.log("Respon Server:", data);
+                } else {
+                    alert("Gagal memproses di server: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error AJAX:", error);
+                alert("Gagal terhubung ke Controller backend .NET!");
+            });
     }
 }
