@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MailForge Studio - GrapesJS</title>
+
+    <!-- MEMUAT ASET LOKAL SEPENUHNYA (100% Anti Macet Jaringan) -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/grapesjs/css/grapes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
+    <style>
+            body, html {
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
+                background-color: #2c3e50;
+                font-family: sans-serif;
+            }
+
+            /* Membawa header atas tetap rapi menggunakan Bootstrap */
+            .editor-header {
+                height: 60px;
+                background: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            /* Area penampung GrapesJS di bawah header */
+            .editor-content {
+                height: calc(100vh - 60px);
+                position: relative;
+            }
+
+            /* Sedikit merapikan warna teks judul kategori block agar elegan */
+            .gjs-block-category .gjs-title {
+                color: #fff;
+                font-weight: bold;
+                background-color: #324c65;
+            }
+
+            /* Kustomisasi tampilan kotak komponen di sidebar kanan agar rapi */
+            .custom-block-item {
+                text-align: center;
+                padding: 10px;
+                background-color: #0d6efd;
+                color: white;
+                border-radius: 4px;
+                font-weight: bold;
+                width: 100%;
+            }
+
+                .custom-block-item i {
+                    font-size: 20px;
+                    display: block;
+                    margin-bottom: 5px;
+                }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header Atas Aplikasi -->
+    <div class="editor-header">
+        <div>
+            <h5 class="fw-bold m-0 text-primary">MailForge Studio</h5>
+            <small class="text-muted" style="font-size: 11px;">Drag-and-drop email editor powered by GrapesJS</small>
+        </div>
+        <div>
+            <button class="btn btn-outline-secondary btn-sm" onclick="openEmailPreview()">Preview</button>
+            <button class="btn btn-primary btn-sm ms-2" onclick="exportEmailHtml()">Export HTML</button>
+        </div>
+    </div>
+
+    <!-- 2. Kontainer Utama Tempat GrapesJS Beraksi -->
+    <div class="editor-content">
+        <div id="gjs">
+            <!-- Template default di dalam canvas -->
+            <table style="width: 100%; max-width: 600px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif; background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 5px;">
+                <tr>
+                    <td align="center" style="padding: 20px;">
+                        <h2 style="color: #333;">Halo dari MailForge!</h2>
+                        <p style="color: #666; font-size: 15px; line-height: 1.6;">Ini adalah langkah awal editor email WYSIWYG Anda. Buka panel Blocks di kanan untuk mulai drag-and-drop!</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 3. Memuat JavaScript Lokal -->
+    <script src="~/lib/font-awesome/js/v4-shims.js"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
+    <script src="~/lib/font-awesome/js/fontawesome.min.js"></script>
+
+    <script src="~/lib/grapesjs/grapes.min.js"></script>
+    <script src="~/grapesjs/mailforge-setup.js"></script>
+</body>
+</html>
